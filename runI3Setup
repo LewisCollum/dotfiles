@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ ! -d "~/.config/i3" ]; then
+    mkdir -p ~/.config/i3
+fi
+rm -vf ~/.config/i3/config
+ln -vs ~/dotfiles/i3/config ~/.config/i3/

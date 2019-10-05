@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+githubName="LewisCollum"
+githubEmail="lewiscollum4@gmail.com"
+githubKeyFile=~/.ssh/id_rsa_github
+
+if [ ! -f "$githubKeyFile" ]; then
+    ssh-keygen \
+        -t rsa \
+        -b 4096 \
+        -C $githubEmail \
+        -f $githubKeyFile
+
+    eval "$(ssh-agent -s)"
+    ssh-add "$githubKeyFile"
+fi
+
+git config --global user.email $githubEmail
+git config --global user.name $githubName
