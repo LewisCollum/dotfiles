@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+rm -vf ~/.config/ranger/rc.conf
+ln -vs ~/dotfiles/ranger/rc.conf ~/.config/ranger/

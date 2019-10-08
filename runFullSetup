@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-find ~/dotfiles/ -name "run*" \
-     ! -name "runFullSetup" \
-     -exec {} \;

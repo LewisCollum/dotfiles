@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+find ~/dotfiles/ -name "setup*" \
+     ! -name "setupFull" \
+     -exec {} \;
