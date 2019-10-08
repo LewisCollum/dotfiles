@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 
-if [ ! -d "~/.config/i3" ]; then
-    mkdir -p ~/.config/i3
-fi
+[ ! -d "~/.config/i3" ] && mkdir -p ~/.config/i3
 rm -vf ~/.config/i3/config
 ln -vs ~/dotfiles/i3/config ~/.config/i3/
+
+[ ! -d "~/.config/i3blocks" ] && mkdir -p ~/.config/i3blocks
+rm -vf ~/.config/i3blocks/config
+ln -vs ~/dotfiles/i3blocks/config ~/.config/i3blocks/
