@@ -16,7 +16,7 @@ if echo $keys | grep -q $title; then
     echo Github SSH key found for this user
 else
     curl -u $gitUsername\
-         --data "{\"title\": \"charon@pluto\", \"key\": \"$(cat ~/.ssh/id_rsa_github.pub)\"}" \
+         --data "{\"title\": \"$title\", \"key\": \"$(cat ~/.ssh/id_rsa_github.pub)\"}" \
          https://api.github.com/user/keys
 fi
 
