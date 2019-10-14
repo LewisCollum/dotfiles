@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+this=$HOME/dotfiles/xorg
+
+rm -vf ~/.xinitrc ~/.Xresources ~/.xserverrc
+
+ln -vs $this/xinitrc ~/.xinitrc
+ln -vs $this/xserverrc ~/.xserverrc
+ln -vs $this/Xresources ~/.Xresources
+
+xrdb -merge $this/Xresources
+

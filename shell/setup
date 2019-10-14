@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+this=$HOME/dotfiles/shell
+
+rm -vf ~/.bashrc ~/.bash_profile ~/.bash_logout ~/.profile
+
+ln -vs $this/bashrc ~/.bashrc
+ln -vs $this/bash_logout ~/.bash_logout
+ln -vs $this/bash_profile ~/.bash_profile
+ln -vs $this/profile ~/.profile
+
+

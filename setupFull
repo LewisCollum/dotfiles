@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-find ~/dotfiles/ -name "setup*" \
-     ! -name "setupFull" \
-     -exec {} \;
+source ./global
+
+find $dotfiles -name "setup" -exec {} \;

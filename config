@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-repositoriesMine=$HOME
-repositories=~/repositories
-
