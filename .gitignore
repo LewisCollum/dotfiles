@@ -1,0 +1,16 @@
+# Auto-generated
+elpa/*
+backup/*
+auto-save-list/*
+.cask/*
+eshell/history
+eshell/lastdir
+.org-id-locations
+
+# User-specific
+cask_location.el
+custom.el
+
+# Temporary
+*~
+\#*
