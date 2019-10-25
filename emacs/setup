@@ -1,8 +1,34 @@
 #!/usr/bin/env bash
 
-target=~/.emacs.d
+link=~/.emacs.d
 this=~/dotfiles/emacs
 
-[[ -L $target && -d $target ]] && unlink $target
-[ -d $target ] && rm -rvf $target
-ln -s $this $target
+emacs_custom="custom.el"
+emacs_cask="cask_location.el"
+cask_location="/usr/share/cask/cask.el"
+
+if [[ -L $link && -d $link ]]; then
+    echo "Removing link $link"
+    unlink $link
+elif [ -d $link ]; then
+    rm -rvf $link
+fi
+
+ln -vs $this $link
+
+if [ ! -f $this/$emacs_custom ]; then
+    touch $this/$emacs_custom
+    echo "Created empty $emacs_custom"
+fi
+
+if [[ ! -x `command -v cask` ]]; then
+    [[ ! -x `command -v yay` ]] && echo "Running yay setup."; . ~/dotfiles/yay/setup
+    echo "Installing cask."
+    sudo yay -S cask
+fi
+
+if [ ! -f $this/$emacs_cask ]; then
+    touch $this/$emacs_cask
+    echo '(setq cask_location $cask_location)' >> $this/$emacs_cask
+    echo "Created $emacs_cask with default cask location."
+fi

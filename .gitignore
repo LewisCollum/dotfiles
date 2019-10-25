@@ -1,13 +1,13 @@
-# Auto-generated
-elpa/*
-backup/*
-auto-save-list/*
-.cask/*
-eshell/history
-eshell/lastdir
-.org-id-locations
+# Emacs Auto-generated
+**/elpa/*
+**/backup/*
+**/auto-save-list/*
+**/.cask/*
+**/eshell/history
+**/eshell/lastdir
+**/.org-id-locations
 
-# User-specific
+# Emacs User-specific
 cask_location.el
 custom.el
 
@@ -16,4 +16,4 @@ custom.el
 \#*
 
 # Yay
-.yay_repo
+**/.yay_repo
