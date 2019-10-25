@@ -1,32 +1,17 @@
 #!/bin/bash
+
 # Update all git directories below current directory or specified directory
-# Skips directories that contain a file called .ignore
 
 HIGHLIGHT="\e[01;34m"
 NORMAL='\e[00m'
 
-function update {
-    local d="$1"
-    if [ -d "$d" ]; then
-        cd $d > /dev/null
-        if [ -d ".git" ]; then
-            echo -e "\n${HIGHLIGHT}Updating `pwd`$NORMAL"
-            git pull
-        else
-            scan *
-        fi
-        cd .. > /dev/null
-    fi
-    #echo "Exiting update: pwd=`pwd`"
-}
+DIR=.
+if [ "$1" != "" ]; then DIR=$1; fi
+cd $DIR>/dev/null; echo -e "${HIGHLIGHT}Scanning ${PWD}${NORMAL}"; cd ->/dev/null
 
-function scan {
-    #echo "`pwd`"
-    for x in $*; do
-        update "$x"
-    done
-}
-
-# if [ "$1" != "" ]; then cd $1 > /dev/null; fi
-echo -e "${HIGHLIGHT}Scanning ${PWD}${NORMAL}"
-find ~ -name .git -type d -prune
+for d in `find . -maxdepth 2 -name .git -type d`; do
+  cd $d/.. > /dev/null
+  echo -e "\n${HIGHLIGHT}Updating `pwd`$NORMAL"
+  #git pull
+  cd - > /dev/null
+done
