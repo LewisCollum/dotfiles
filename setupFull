@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-
-source ./global
-
-find $dotfiles -name "setup" -exec {} \;
