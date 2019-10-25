@@ -1,0 +1,18 @@
+alias psync sudo pacman -Syy
+alias remove sync
+alias red redshift -PO $1
+alias wificonnect connmanctl connect {wifisearch $1}
+alias s sudo systemctl $*
+alias f sudo find / -name $1
+alias l1 ls -1
+alias t tree --dirsfirst -C
+alias sstatus systemctl status sshd
+alias sstop systemctl stop sshd
+alias sstart systemctl start sshd
+alias update sudo pacman -Syu
+alias add sudo pacman -S $1
+alias del trash-put $*
+alias cadd yay -S $1
+alias search pacman -Fs $1
+alias wifisearch connmanctl services | grep $1 | grep -o "wifi_.*"
+alias wifiscan connmanctl scan wifi
