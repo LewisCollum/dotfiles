@@ -24,9 +24,9 @@ if [ ! -f $this/$emacs_custom ]; then
 fi
 
 if [[ ! -x `command -v cask` ]]; then
-    if [[ ! -x `command -v yay` ]];
-       echo "Running yay setup."
-       . ~/dotfiles/yay/setup
+    if [[ ! -x `command -v yay` ]]; then
+        echo "Running yay setup."
+        . ~/dotfiles/yay/setup
     fi
     echo "Installing cask."
     yay -S cask
