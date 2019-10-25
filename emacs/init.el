@@ -6,7 +6,7 @@
 
 (load "~/.emacs.d/metapost-mode+.el")
 (load "~/.emacs.d/org/org.el")
-(load "~/.emacs.d/layout.el")
+(when (display-graphic-p) (load "~/.emacs.d/layout.el"))
 (load "~/.emacs.d/startup.el")
 (load "~/.emacs.d/backup.el")
 
