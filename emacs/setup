@@ -7,6 +7,8 @@ emacs_custom="custom.el"
 emacs_cask="cask_location.el"
 cask_location="/usr/share/cask/cask.el"
 
+[[ ! -x `command -v emacs` ]] && sudo pacman -S emacs
+
 if [[ -L $link && -d $link ]]; then
     echo "Removing link $link"
     unlink $link
@@ -22,9 +24,12 @@ if [ ! -f $this/$emacs_custom ]; then
 fi
 
 if [[ ! -x `command -v cask` ]]; then
-    [[ ! -x `command -v yay` ]] && echo "Running yay setup."; . ~/dotfiles/yay/setup
+    if [[ ! -x `command -v yay` ]];
+       echo "Running yay setup."
+       . ~/dotfiles/yay/setup
+    fi
     echo "Installing cask."
-    sudo yay -S cask
+    yay -S cask
 fi
 
 if [ ! -f $this/$emacs_cask ]; then
