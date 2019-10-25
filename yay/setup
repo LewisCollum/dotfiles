@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+yayRepo=~/dotfiles/yay/.yay_repo
+
+if [ -d $yayRepo ]; then
+    cd $yayRepo
+    git pull
+else
+    mkdir $yayRepo
+    git clone https://aur.archlinux.org/yay.git $yayRepo
+fi
+
+cd $yayRepo
+makepkg -si
+

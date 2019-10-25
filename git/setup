@@ -1,19 +1,85 @@
 #!/usr/bin/env bash
 
-githubName="LewisCollum"
-githubEmail="lewiscollum4@gmail.com"
-githubKeyFile=~/.ssh/id_rsa_github
+function main() {
+    installMissingPackages
+    setGitConfig
+    createSshKeyForGithub
+    addSshKeyToGithub
+}
 
-if [ ! -f "$githubKeyFile" ]; then
-    ssh-keygen \
-        -t rsa \
-        -b 4096 \
-        -C $githubEmail \
-        -f $githubKeyFile
+function installMissingPackages() {
+    local packages=""
+    [ ! -v ssh ] && packages+=" openssh"
+    [ ! -v git ] && packages+=" git"
+}
 
-    eval "$(ssh-agent -s)"
-    ssh-add "$githubKeyFile"
-fi
+function setGitConfig() {
+    githubName=`git config --global --get user.name`
+    githubEmail=`git config --global --get user.email`
 
-git config --global user.email $githubEmail
-git config --global user.name $githubName
+    if [ ! -z "$githubName" ] && [ ! -z "$githubEmail" ]; then
+        echo Github Username: $githubName
+        echo Github Email: $githubEmail
+
+        while true; do
+            read -p "Is this information correct? (y/n) " yn
+            case $yn in
+                [Yy]* ) break;;
+                [Nn]* ) storeGithubUserInfoFromRead; break;;
+                * ) echo "Please answer yes or no.";;
+            esac
+        done
+    else
+        storeGithubUserInfoFromRead
+    fi
+}
+
+function storeGithubUserInfoFromRead() {
+    read -p "Github Username: " githubName
+    read -p "Github Email: " githubEmail
+    git config --global user.email $githubEmail
+    git config --global user.name $githubName
+}
+
+function createSshKeyForGithub() {
+    sshDirectory=~/.ssh
+    githubKeyFile=$sshDirectory/id_rsa.github
+
+    [ ! -d $sshDirectory ] && mkdir $sshDirectory
+    if [ ! -f "$githubKeyFile" ]; then
+        ssh-keygen \
+            -t rsa \
+            -b 4096 \
+            -C $githubEmail \
+            -f $githubKeyFile
+        
+        eval "$(ssh-agent -s)"
+        ssh-add "$githubKeyFile"
+    else
+        echo "$githubKeyFile already exists."
+    fi
+
+    [ ! -f $sshDirectory/config ] && touch $sshDirectory/config
+    if ! grep -q 'host github.com' $sshDirectory/config; then
+        printf "host github.com \n\tHostName github.com \n\tIdentityFile $githubKeyFile \n\tUser git \n" >> $sshDirectory/config
+    fi
+}
+
+function addSshKeyToGithub() {
+    #TODO implement OAuth
+    read -s -p "Github Password: " githubPassword
+    echo
+    
+    title="$(whoami)@$(hostname)"
+    keys="$(curl -u $githubName:$githubPassword https://api.github.com/user/keys)"
+
+    if echo $keys | grep -q $title; then
+        echo Github SSH key found for this user
+    else
+        curl -u $githubName:$githubPassword \
+             --data "{\"title\": \"$title\", \"key\": \"$(cat $githubKeyFile.pub)\"}" \
+             https://api.github.com/user/keys
+    fi
+}
+
+main

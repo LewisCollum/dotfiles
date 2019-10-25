@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+target=~/.emacs.d
+this=~/dotfiles/emacs
+
+[[ -L $target && -d $target ]] && unlink $target
+[ -d $target ] && rm -rvf $target
+ln -s $this $target

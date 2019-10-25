@@ -9,4 +9,3 @@ ln -vs $this/bash_logout ~/.bash_logout
 ln -vs $this/bash_profile ~/.bash_profile
 ln -vs $this/profile ~/.profile
 
-
