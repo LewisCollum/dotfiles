@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-rm -vf ~/.xinitrc ~/.Xresources ~/.xserverrc
-ln -vs ~/dotfiles/xorg/xinitrc ~/.xinitrc
-ln -vs ~/dotfiles/xorg/xserverrc ~/.xserverrc
-
-xrdb -merge ~/dotfiles/xorg/Xresources
-ln -vs ~/dotfiles/xorg/Xresources ~/.Xresources

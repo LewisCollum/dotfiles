@@ -1,5 +1,6 @@
 export GPG_TTY=$(tty)
 export PATH=$PATH:$HOME/bin
+export PATH=$PATH:$HOME/dotfiles/bin
 
 RUBY_PATH=`ruby -e 'puts Gem.user_dir'`
 export PATH="$PATH:$RUBY_PATH/bin"
