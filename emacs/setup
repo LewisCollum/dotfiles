@@ -34,6 +34,6 @@ fi
 
 if [ ! -f $this/$emacs_cask ]; then
     touch $this/$emacs_cask
-    echo '(setq cask_location $cask_location)' >> $this/$emacs_cask
+    echo "(setq cask_location \"${cask_location}\")" >> $this/$emacs_cask
     echo "Created $emacs_cask with default cask location."
 fi
