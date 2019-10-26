@@ -59,6 +59,7 @@ function createSshKeyForGithub() {
         echo "$githubKeyFile already exists."
     fi
 
+    [ -L $sshDirectory/config ] && error "$sshDirectory/config cannot be a symbolic link"
     [ ! -f $sshDirectory/config ] && touch $sshDirectory/config
     if ! grep -q 'host github.com' $sshDirectory/config; then
         printf "host github.com \n\tHostName github.com \n\tIdentityFile $githubKeyFile \n\tUser git \n" >> $sshDirectory/config
@@ -80,6 +81,11 @@ function addSshKeyToGithub() {
              --data "{\"title\": \"$title\", \"key\": \"$(cat $githubKeyFile.pub)\"}" \
              https://api.github.com/user/keys
     fi
+}
+
+function error() {
+    echo "ERROR: $1"
+    exit 1
 }
 
 main
