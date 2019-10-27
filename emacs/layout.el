@@ -2,4 +2,4 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (set-window-fringes nil 10 10)
-(load-theme 'xresources t)
+(when (display-graphic-p) (load-theme 'xresources t))
