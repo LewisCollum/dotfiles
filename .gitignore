@@ -9,7 +9,6 @@
 
 # Emacs User-specific
 cask_location.el
-custom.el
 
 # Temporary
 *~
