@@ -35,13 +35,16 @@
 *.color7:       #707880
 *.color15:      #c5c8c6
 
+URxvt.font: xft:Inconsolata:size=16
 URxvt.scrollBar: false
-URxvt*font: xft:Inconsolata:size=16
 URxvt.fading: 0
 URxvt.perl-ext-common: default,resize-font,url-select,keyboard-select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.resize-font.smaller: C-Down
 URxvt.resize-font.bigger: C-Up
+
+! Keep this consistent with emacs set-default-font variable
+Emacs.font: Inconsolata-16
 
 Emacs*cursorBlink: true
 Emacs*fullscreen: maximized
