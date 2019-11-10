@@ -16,3 +16,4 @@ alias cadd yay -S $1
 alias search pacman -Fs $1
 alias wifisearch connmanctl services | grep $1 | grep -o "wifi_.*"
 alias wifiscan connmanctl scan wifi
+alias mkx touch $1; chmod +x $1; echo "#!/usr/bin/env bash" > $1
