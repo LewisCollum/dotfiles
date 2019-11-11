@@ -12,3 +12,4 @@
       '(("framesep" "6pt") ("fontfamily" "courier")("fontsize" "\\footnotesize")))
 
 (setq org-latex-image-default-width "")
+(setq org-export-allow-bind-keywords t) ;; Allow #+bind:
