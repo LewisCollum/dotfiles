@@ -2,13 +2,15 @@
 **/elpa/*
 **/backup/*
 **/auto-save-list/*
-**/.cask/*
+**/.cask
 **/eshell/history
 **/eshell/lastdir
 **/.org-id-locations
 
 # Emacs User-specific
 cask_location.el
+custom.el
+tramp
 
 # Temporary
 *~

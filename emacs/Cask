@@ -1,5 +1,9 @@
 (source gnu)
 (source melpa)
+(source org)
+
+(depends-on "org-plus-contrib")
+(depends-on "org-bullets")
 
 (depends-on "ansi")
 (depends-on "arduino-mode")
