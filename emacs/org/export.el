@@ -13,3 +13,14 @@
 
 (setq org-latex-image-default-width "")
 (setq org-export-allow-bind-keywords t) ;; Allow #+bind:
+
+(setq org-latex-minted-langs '((emacs-lisp "common-lisp")
+                               (cc "c++")
+                               (cperl "perl")
+                               (shell-script "bash")
+                               (caml "ocaml")
+                               (spice "text")))
+
+;; For hidden sections that can be selectively exported with tags
+(require 'ox-extra)
+(ox-extras-activate '(latex-header-blocks ignore-headlines))
