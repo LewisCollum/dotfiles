@@ -4,10 +4,11 @@
 (require 'color)
 (setq org-src-block-faces
       '(("bash" (:background "#333049"))
-        ("python" (:background "#242149"))))
+        ("python" (:background "#242149"))
+	("C++" (:background "#242149"))))
 
 (defun no-org-confirm-babel-evaluate (lang body)
-  (not (member lang '("C" "bash" "python" "elisp" "plantuml" "spice"))))
+  (not (member lang '("C++" "C" "bash" "python" "elisp" "plantuml" "spice"))))
 (setq org-confirm-babel-evaluate 'no-org-confirm-babel-evaluate)
 
 (org-babel-do-load-languages
