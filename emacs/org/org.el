@@ -7,4 +7,4 @@
 (setq org-list-allow-alphabetical t)
 (add-hook 'org-mode-hook 'org-bullets-mode)
 
-
+(require 'ob-async)
