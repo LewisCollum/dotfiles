@@ -2,6 +2,9 @@
 (require 'cask cask_location)
 (cask-initialize)
 
+(when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 (load "~/.emacs.d/layout.el")
 (load "~/.emacs.d/metapost-mode+.el")
 (load "~/.emacs.d/org/org.el")
