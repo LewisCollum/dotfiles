@@ -18,3 +18,4 @@ alias s sudo systemctl $*
 alias wificonnect connmanctl connect {wifisearch $1}
 alias red redshift -PO $1
 alias psync sudo pacman -Syy
+alias premove sudo pacman -Rsn $*
