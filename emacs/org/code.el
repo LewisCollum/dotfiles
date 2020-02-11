@@ -5,7 +5,8 @@
 (setq org-src-block-faces
       '(("bash" (:background "#333049"))
         ("python" (:background "#242149"))
-        ("C++" (:background "#242149"))))
+        ("C++" (:background "#242149"))
+        ("R" (:background "#003264"))))
 
 (defun no-org-confirm-babel-evaluate (lang body)
   (not (member lang '("C++" "C" "bash" "python" "elisp" "plantuml" "spice" "R"))))
