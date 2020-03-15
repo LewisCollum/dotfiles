@@ -9,7 +9,15 @@
         ("R" (:background "#003264"))))
 
 (defun no-org-confirm-babel-evaluate (lang body)
-  (not (member lang '("C++" "C" "bash" "python" "elisp" "plantuml" "spice" "R"))))
+  (not (member lang '("C++"
+                      "C"
+                      "bash"
+                      "python"
+                      "elisp"
+                      "plantuml"
+                      "spice"
+                      "R"
+                      "octave"))))
 (setq org-confirm-babel-evaluate 'no-org-confirm-babel-evaluate)
 
 (org-babel-do-load-languages
@@ -19,7 +27,8 @@
    (C . t)
    (latex . t)
    (plantuml . t)
-   (R . t)))
+   (R . t)
+   (octave . t)))
 
 (add-to-list 'load-path "~/.emacs.d/ob-spice/")
 (require 'ob-spice)
