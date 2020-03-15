@@ -1,9 +1,6 @@
-#
-# ~/.bashrc
-#
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
+export GPG_TTY=$(tty)
 
 alias rm='echo "use trash-put instead."; false'
 alias del='trash-put'
@@ -24,7 +21,13 @@ alias ee462logon='ssh -p 1222 colluml@127.0.0.1'
 alias ee462stop='VBoxManage controlvm EE462 poweroff'
 alias shareme='x0vncserver -rfbauth ~/.vnc/passwd -RemapKeys="0xffeb<>0xffea"'
 
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+    eval "$(pyenv init -)"
+fi
+
 PS1='[\u@\h \W]\$ '
 
 [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
-
