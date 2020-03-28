@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+mv "`ls -td1 ~/Downloads/* | head -n 1`" ./"$1"
