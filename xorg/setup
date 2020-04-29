@@ -8,5 +8,5 @@ ln -vs $this/xinitrc ~/.xinitrc
 ln -vs $this/xserverrc ~/.xserverrc
 ln -vs $this/Xresources ~/.Xresources
 
-xrdb -merge $this/Xresources
+xrdb $this/Xresources
 
