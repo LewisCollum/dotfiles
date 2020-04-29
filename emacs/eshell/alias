@@ -1,3 +1,8 @@
+alias ss systemctl status $*
+alias sr systemctl restart $*
+alias se systemctl stop $*
+alias s systemctl $*
+
 alias mkx touch $1; chmod +x $1; echo "#!/usr/bin/env bash" > $1
 alias del trash-put $*
 alias f sudo find / -name $1
