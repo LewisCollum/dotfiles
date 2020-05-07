@@ -3,10 +3,11 @@
 (setq org-export-with-sub-superscripts nil)
 
 (setq org-latex-listings 'minted
-      org-latex-packages-alist '(("" "minted"))
-      org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-        "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+      org-latex-packages-alist '(("" "minted")))
+
+(require 'org-ref)
+(setq org-latex-pdf-process
+      '("latexmk -bibtex -pdflatex='%latex -shell-escape -interaction nonstopmode' -pdf -output-directory=%o -f %f"))
 
 (setq org-latex-minted-options
       '(("framesep" "6pt") ("fontfamily" "courier")("fontsize" "\\footnotesize")))

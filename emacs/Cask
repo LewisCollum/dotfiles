@@ -5,6 +5,7 @@
 (depends-on "org-plus-contrib")
 (depends-on "org-bullets")
 (depends-on "ob-async")
+(depends-on "org-ref")
 
 (depends-on "ansi")
 (depends-on "arduino-mode")
