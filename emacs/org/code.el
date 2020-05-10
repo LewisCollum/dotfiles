@@ -1,5 +1,6 @@
 (setq org-src-preserve-indentation t)
 (setq org-src-fontify-natively t)
+(setq org-src-window-setup 'current-window)
 
 (require 'color)
 (setq org-src-block-faces
