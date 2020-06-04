@@ -5,6 +5,7 @@
    (c-offsets-alist . ((inline-open . 0)
                        (brace-list-open . 0)
                        (statement-case-open . +)
+                       (substatement-open . 0)
                        (inlambda . 0) ; no extra indent for lambda
                        (block-open . 0))))) ; no space before {
 
