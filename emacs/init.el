@@ -5,6 +5,7 @@
 (load "~/.emacs.d/backup.el")
 (load "~/.emacs.d/text.el")
 (load "~/.emacs.d/keys.el")
+(load "~/.emacs.d/remote.el")
 
 (load "~/.emacs.d/code/cpp.el")
 (load "~/.emacs.d/code/latex.el")

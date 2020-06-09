@@ -3,11 +3,13 @@
 (setq org-src-window-setup 'current-window)
 
 (require 'color)
-(setq org-src-block-faces
-      '(("bash" (:background "#333049"))
-        ("python" (:background "#242149"))
-        ("C++" (:background "#242149"))
-        ("R" (:background "#003264"))))
+(custom-set-faces
+ '(org-block-begin-line
+   ((t (:foreground "#7e79b3" :background "#3d3b52"))))
+ '(org-block
+   ((t (:background "#2c2b3b"))))
+ '(org-block-end-line
+   ((t (:foreground "#7e79b3" :background "#3d3b52")))))
 
 (defun no-org-confirm-babel-evaluate (lang body)
   (not (member lang '("C++"
