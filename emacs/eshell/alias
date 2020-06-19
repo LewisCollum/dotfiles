@@ -1,26 +1,23 @@
+alias gi grep -r --include="*.$2" $1 .
+alias g grep -r $1 .
 alias ss systemctl status $*
 alias sr systemctl restart $*
 alias se systemctl stop $*
 alias s systemctl $*
-
 alias mkx touch $1; chmod +x $1; echo "#!/usr/bin/env bash" > $1
 alias del trash-put $*
 alias f sudo find / -name $1
-
 alias lss ls -1 | grep -v ^Test.*
 alias lst ls -1 | grep ^Test.*
 alias l1 ls -1
 alias t tree --dirsfirst -C
-
 alias add sudo pacman -S $1
 alias cadd yay -S $1
-
 alias searchp pacman -Fs $1
 alias updatep sudo pacman -Syyu
 alias removep sudo pacman -Rsn $*
-
 alias wificonnect connmanctl connect {wifisearch $1}
 alias wifiscan connmanctl scan wifi
 alias wifisearch connmanctl services | grep $1 | grep -o "wifi_.*"
-
 alias red redshift -PO $1
+alias whosLoggedIn last -a | grep -i "still logged in"
