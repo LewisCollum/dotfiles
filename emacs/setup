@@ -38,7 +38,6 @@ if [ ! -f $this/$emacs_cask ]; then
     echo "Created $emacs_cask with default cask location."
 fi
 
+echo "SETUP: Running cask to install emacs dependencies..."
 cask
-echo "SETUP: Running 'cask update' and 'cask install' for emacs dependencies"
-cask update
-cask install
+cask
