@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+
+main() {
+	ensureCommandsExist
+	parseParameters $@
+	
+	if [[ $state == "encrypt" ]]; then
+		ensureFileExists
+		generatePassword
+		encryptFileWithGeneratedPassword
+		
+	elif [[ $state == "decrypt" ]]; then
+		ensureFileExists
+		decryptFile
+		
+	elif [[ $state == "help" ]]; then
+		echoHelpMenu
+	fi
+}
+
+ensureCommandsExist() {
+	command -v pass > /dev/null 2>&1 || {
+		>&2 echo "Install \"pass\". View details at https://www.passwordstore.org/"
+		exit 1
+	}
+
+	command -v gpg > /dev/null 2>&1 || {
+		>&2 echo "Install the \"gnupg\" package."
+		exit 1
+	}
+}
+
+parseParameters() {
+	local options=`getopt --quiet -options edh --long encrypt,decrypt,help -- "$@"`
+	
+	while true ; do
+		case "$1" in
+			-e|--encrypt) state="encrypt"; file="$2"; shift 2; break;;
+			-d|--decrypt) state="decrypt"; file="$2"; shift 2; break;;
+			-h|--help) state="help"; shift 1; break;;
+			-*) >&2 echo "Not a valid option \"$1\". Use `basename "$0"` --help"; exit 1;;
+			*) >&2 echo "Must start with an option. Use `basename "$0"` --help"; exit 1;;
+		esac
+	done
+	ensureNoUnhandledParameters $#
+}
+
+ensureNoUnhandledParameters() {
+	if [[ $1 -ne "0" ]]; then
+		>&2 echo "Too many parameters. Use \"ewp [-e|-d] <file>\"."
+		exit 1
+	fi
+}
+
+ensureFileExists() {
+	if [ ! -f $file ]; then
+		>&2 echo "File \"$file\" does not exist."
+		exit 1
+	fi
+}
+
+decryptFile() {
+	local password=`getPassword`
+	local fileNew=`getFileWithoutLastExtension $file`
+	local fileTemp=`mktemp /tmp/$fileNew.XXX`
+	gpg --batch --passphrase $password --decrypt $file > $fileTemp
+	echo "[SUCCESS] File written as $fileTemp"
+}
+
+getPassword() {
+	local filename=`getFilename $file`
+    echo `pass file/$filename`
+}
+
+
+generatePassword() {
+	local filename=`getFilename $file`
+	echo y | pass generate --clip file/$filename > /dev/null
+	password=`xclip -selection clipboard -o`	
+}
+
+encryptFileWithGeneratedPassword() {
+	local filename=`getFilename $file`    
+	if [ -f $file.gpg ]; then
+		rm $file.gpg
+	fi
+	gpg --batch --passphrase $password --symmetric $file
+	echo "[SUCCESS] Use \"pass file/$filename\" to view the password for $file.gpg"
+}
+
+
+getFileWithoutLastExtension() {
+	echo "${1%.*}"
+}
+
+getFilename() {
+	echo "${1%%.*}"
+}
+
+
+echoHelpMenu() {
+	echo "EWP: Encrypt with Pass!"
+	echo " Encrypt or decrypt files that have passwords managed by \"pass\" store."
+	echo "Options:"
+	echo -e " -e, --encrypt <file>\t Encrypts <file> with a randomly generated password."
+	echo -e " -d, --decrypt <file>\t Decrypts file using its password in your \"pass\" store."
+}
+
+main "$@"

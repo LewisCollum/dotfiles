@@ -18,7 +18,6 @@
 
 (let* ((foreground (xresources-theme-color "foreground"))
        (background (xresources-theme-color "background"))
-	   (dark-gray (xresources-theme-color "dark-gray"))
        (black (xresources-theme-color "color0"))
        (red (xresources-theme-color "color1"))
        (green (xresources-theme-color "color2"))
@@ -46,7 +45,7 @@
    `(default ((t (:foreground ,foreground :background ,background))))
    `(cursor ((t (:foreground ,foreground :background ,foreground))))
    `(escape-glyph ((t (:foreground ,yellow :bold t))))
-   `(fringe ((t (:foreground ,dark-gray :background ,background))))
+   `(fringe ((t (:foreground ,black :background ,background))))
    `(header-line ((t (:foreground ,yellow
                                   :background ,background
                                   :box (:line-width -1 :style released-button)))))
@@ -98,7 +97,7 @@
              (t :inverse-video t)))
    `(secondary-selection ((t (:background ,background))))
    `(trailing-whitespace ((t (:background ,red))))
-   `(vertical-border ((t (:foreground ,dark-gray))))
+   `(vertical-border ((t (:foreground ,black))))
 
    ;; font lock
    `(font-lock-builtin-face ((t (:foreground ,foreground :weight bold))))
@@ -409,6 +408,9 @@
    `(org-mode-line-clock-overrun ((t (:foreground ,background :background ,red))))
    `(org-ellipsis ((t (:foreground ,yellow :underline t))))
    `(org-footnote ((t (:foreground ,cyan :underline t))))
+   `(org-block ((t (:background ,black))))
+   `(org-block-begin-line ((t (:foreground ,cyan :background ,light-gray))))
+   `(org-block-end-line ((t (:foreground ,cyan :background ,light-gray))))   
 
    ;; outline
    `(outline-1 ((t (:foreground ,red))))

@@ -2,15 +2,6 @@
 (setq org-src-fontify-natively t)
 (setq org-src-window-setup 'current-window)
 
-(require 'color)
-(custom-set-faces
- '(org-block-begin-line
-   ((t (:foreground "#7e79b3" :background "#3d3b52"))))
- '(org-block
-   ((t (:background "#2c2b3b"))))
- '(org-block-end-line
-   ((t (:foreground "#7e79b3" :background "#3d3b52")))))
-
 (defun no-org-confirm-babel-evaluate (lang body)
   (not (member lang '("C++"
                       "C"

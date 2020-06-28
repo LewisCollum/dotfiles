@@ -1,25 +1,27 @@
-;; Makes *scratch* empty.
-(setq initial-scratch-message "")
+(add-hook 'after-change-major-mode-hook
+          '(lambda ()(if (get-buffer "*scratch*")(kill-buffer "*scratch*"))))
 
-;; Removes *scratch* from buffer after the mode has been set.
-(defun remove-scratch-buffer ()
-  (if (get-buffer "*scratch*")
-      (kill-buffer "*scratch*")))
-(add-hook 'after-change-major-mode-hook 'remove-scratch-buffer)
+(require 'interaction-log)
+;;Note: Must turn on buffer first [interactive-log-mode]
+(global-set-key (kbd "C-h C-l") (lambda ()(interactive)(display-buffer ilog-buffer-name)))
 
-;; Removes *messages* from the buffer.
-(setq-default message-log-max nil)
+(setq-default message-log-max nil)                      
 (kill-buffer "*Messages*")
 
 ;; Removes *Completions* from buffer after you've opened a file.
 (add-hook 'minibuffer-exit-hook
-      '(lambda ()
-         (let ((buffer "*Completions*"))
-           (and (get-buffer buffer)
-                (kill-buffer buffer)))))
+          '(lambda ()
+             (let ((buffer "*Completions*"))
+               (and (get-buffer buffer)
+                    (kill-buffer buffer)))))
 
-;; Don't show *Buffer list* when opening multiple files at the same time.
-(setq inhibit-startup-buffer-menu t)
+(defun killBuffer(buffer)
+  (and (get-buffer buffer)
+       (kill-buffer buffer)))
+  
+;; Removes *Completions* from buffer after you've opened a file.
+(add-hook 'minibuffer-exit-hook
+          '(lambda()(killBuffer "*Completions")))
 
 ;; Show only one active window when opening multiple files at the same time.
 (add-hook 'window-setup-hook 'delete-other-windows)

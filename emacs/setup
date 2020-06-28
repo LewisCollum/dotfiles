@@ -39,5 +39,6 @@ if [ ! -f $this/$emacs_cask ]; then
 fi
 
 echo "SETUP: Running cask to install emacs dependencies..."
+cask list
 cask
 cask

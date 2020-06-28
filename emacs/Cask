@@ -7,6 +7,9 @@
 (depends-on "ob-async")
 (depends-on "org-ref")
 
+(depends-on "direx")
+(depends-on "popwin")
+(depends-on "rainbow-mode")
 (depends-on "ansi")
 (depends-on "arduino-mode")
 (depends-on "auctex")
