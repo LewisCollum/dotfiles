@@ -13,3 +13,4 @@
   (c-set-style "normal-tab-style"))
 
 (add-hook 'c++-mode-hook 'my-c++-mode-hook)
+(add-hook 'c-mode-hook 'my-c++-mode-hook)
