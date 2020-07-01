@@ -7,7 +7,7 @@
 (depends-on "ob-async")
 (depends-on "org-ref")
 
-(depends-on "scad-mod")
+(depends-on "scad-mode")
 (depends-on "interaction-log")
 (depends-on "direx")
 (depends-on "popwin")
