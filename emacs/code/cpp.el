@@ -1,10 +1,8 @@
-(defconst indentSpaces 4)
-
-(setq cmake-tab-width indentSpaces)
+(setq cmake-tab-width 4)
 (c-add-style
  "normal-tab-style"
  '((indent-tabs-mode . nil)
-   (c-basic-offset . indentSpaces)
+   (c-basic-offset . 4)
    (c-offsets-alist . ((inline-open . 0)
                        (brace-list-open . 0)
                        (statement-case-open . +)
