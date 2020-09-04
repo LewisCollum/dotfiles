@@ -1,3 +1,4 @@
+(setq cmake-tab-width 4)
 (c-add-style
  "normal-tab-style"
  '((indent-tabs-mode . nil)
