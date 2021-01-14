@@ -1,1 +1,5 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
+
+# User specific environment and startup programs
+export PATH=/opt/cuda/bin/:/usr/local/bin/:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib/:/usr/local/lib64/:$LD_LIBRARY_PATH
