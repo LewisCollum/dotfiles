@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+packages=( $(pacman -Qqett) )
+
+for package in ${packages[@]}; do
+    printf "$package ($(pacman -Qi $package | sed -n 's/Description.*: //p')) "
+    read input
+    case $input in
+        [Yy] ) sudo pacman -Rsn $package;
+    esac
+done
