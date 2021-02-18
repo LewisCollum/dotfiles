@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+IFS=$'\n'
+names=(`bluetoothctl paired-devices | cut --complement -f1,2 -d' '`)
+ids=(`bluetoothctl paired-devices | cut -f2 -d' '`)
+
+echo "Connect to paired device:"
+
+i=0
+for name in ${names[@]}; do
+    echo "  $i) $name"
+    ((++i))
+done
+
+read -s -n1 choice
+echo "Connecting to \"${names[choice]}\" (${ids[choice]})"
+bluetoothctl connect "${ids[choice]}"
