@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+isBluetoothBlocked="$(rfkill | grep bluetooth | grep -e '\bblocked')"
+if [ ! -z "$isBluetoothBlocked" ]; then
+    sudo rfkill unblock bluetooth
+fi
+
 IFS=$'\n'
 names=(`bluetoothctl paired-devices | cut --complement -f1,2 -d' '`)
 ids=(`bluetoothctl paired-devices | cut -f2 -d' '`)
