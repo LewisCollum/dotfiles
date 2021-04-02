@@ -4,6 +4,7 @@
 (load "~/.emacs.d/org/org.el")
 (load "~/.emacs.d/backup.el")
 (load "~/.emacs.d/text.el")
+(load "~/.emacs.d/skeleton.el")
 (load "~/.emacs.d/keys.el")
 (load "~/.emacs.d/remote.el")
 (load "~/.emacs.d/buffer.el")
