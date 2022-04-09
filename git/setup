@@ -1,16 +1,9 @@
 #!/usr/bin/env bash
 
 function main() {
-    installMissingPackages
     setGitConfig
     createSshKeyForGithub
     addSshKeyToGithub
-}
-
-function installMissingPackages() {
-    local packages=""
-    [ ! -v ssh ] && packages+=" openssh"
-    [ ! -v git ] && packages+=" git"
 }
 
 function setGitConfig() {
