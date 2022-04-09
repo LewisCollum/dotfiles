@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+echo "Scanning..."
+connmanctl scan wifi
+
+connectables=`connmanctl services | sed 's/\*A.//g' | sed -r 's/^\s+wifi_.*//g' | sed -r 's/^\s+//g' | sed -r 's/\s+/ /g' | egrep '.*\b'`
+
+names=(`printf '%s\n' "$connectables" | sed 's/ wifi_.*//g' | sed -r 's/\s+/_/g'`)
+ids=(`printf '%s\n' "$connectables" | grep -o "wifi_.*"`)
+
+echo "Connect to wifi:"
+
+i=0
+for name in ${names[@]}; do
+    echo "  $i) $name"
+    ((++i))
+done
+
+read -s -n1 choice
+echo "Connecting to \"${names[$choice]}\" (${ids[$choice]})"
+connmanctl connect ${ids[$choice]}
