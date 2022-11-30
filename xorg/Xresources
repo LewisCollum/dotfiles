@@ -1,10 +1,10 @@
 ! special
 *.foreground:   #c5c8c6
-*.background:   #000000
+*.background:   #2d3135
 *.cursorColor:  #c5c8c6
 
 ! black
-*.color0:       #161820
+*.color0:       #282a2e
 *.color8:       #373b41
 
 ! red
@@ -35,16 +35,21 @@
 *.color7:       #707880
 *.color15:      #c5c8c6
 
-URxvt.font: xft:DejavuSansMono:pixelsize=14
+
+URxvt.font: xft:Iosevka:pixelsize=16
 URxvt.scrollBar: false
 URxvt.fading: 0
-URxvt.perl-ext-common: default,resize-font,url-select,keyboard-select
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.resize-font.smaller: C-Down
-URxvt.resize-font.bigger: C-Up
+URxvt.perl-ext-common: default,matcher,tabbed,resize-font
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline Bold fg7
 
-! Keep this consistent with emacs set-default-font variable
-Emacs.font: DejaVu Sans Mono-12
+URxvt.tabbed.tabbar-fg: 8
+URxvt.tabbed.tabbar-bg: 0
+URxvt.tabbed.tab-fg: 4
+URxvt.tabbed.tab-bg: 0
 
 Emacs*cursorBlink: true
 Emacs*fullscreen: maximized
