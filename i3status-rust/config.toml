@@ -1,25 +1,25 @@
 theme = "slick"
-icons = "awesome"
+icons = "awesome6"
 
 [[block]]
 block = "custom"
-command = "echo 'screenshot'"
-on_click = "flameshot"
+command = "echo "
+on_click = "flameshot gui"
 
 [[block]]
 block = "custom"
-command = "echo 'bluetooth'"
+command = "echo "
 on_click = "blueberry"
 
 [[block]]
 block = "custom"
-command = "echo 'wifi'"
+command = "echo "
 on_click = "cmst"
 
 [[block]]
 block = "net"
-format = "{ssid} {signal_strength} {ip} {speed_down;K*b}"
-format_alt = "{ssid} {signal_strength} {ip} {speed_up;K*b}"
+format = "{ip} {speed_down;K*b}"
+format_alt = "{ip} {speed_up;K*b}"
 interval = 5
 
 [[block]]
@@ -59,9 +59,6 @@ block = "sound"
 block = "hueshift"
 step = 50
 click_temp = 4500
-
-[[block]]
-block = "backlight"
 
 [[block]]
 block = "time"
