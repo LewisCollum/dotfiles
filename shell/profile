@@ -1,9 +1,18 @@
 export GPG_TTY=$(tty)
-export PATH=$PATH:$HOME/bin
-export PATH=$PATH:$HOME/dotfiles/bin
+export PATH=$HOME/bin:$PATH
+export PATH=$HOME/dotfiles/bin:$PATH
+export PATH=/opt/resolve/bin:$PATH
 
-RUBY_PATH=`ruby -e 'puts Gem.user_dir'`
-export PATH="$PATH:$RUBY_PATH/bin"
+# User specific environment and startup programs
+export PATH=$HOME/.local/bin:/opt/cuda/bin/:/usr/local/bin/:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib/:/usr/local/lib64/:$LD_LIBRARY_PATH
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 
 #For OpenCV g++
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig/
+
+[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc

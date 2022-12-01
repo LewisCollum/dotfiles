@@ -1,34 +1,10 @@
+#!/usr/bin/env bash
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-export GPG_TTY=$(tty)
-
-alias rm='echo "use trash-put instead."; false'
-alias del='trash-put'
-alias ls='ls --color=auto'
-alias la='ls -a --color=auto'
-alias ll='ls -l --color=auto'
-alias update='sudo pacman -Syu'
-alias remove='sudo pacman -Rsn'
-alias add='sudo pacman -S'
-alias wifi='sudo wifi-menu'
-alias sstart='systemctl start sshd'
-alias sstatus='systemctl status sshd'
-alias sstop='systemctl stop sshd'
-alias polarisf='sftp colluml@polaris.clarkson.edu'
-alias polaris='ssh colluml@polaris.clarkson.edu'
-alias ee462start='VBoxManage startvm EE462 --type headless'
-alias ee462logon='ssh -p 1222 colluml@127.0.0.1'
-alias ee462stop='VBoxManage controlvm EE462 poweroff'
-alias shareme='x0vncserver -rfbauth ~/.vnc/passwd -RemapKeys="0xffeb<>0xffea"'
-alias qemacs='emacs -Q -nw'
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 
 if command -v pyenv 1>/dev/null 2>&1; then
     eval "$(pyenv init -)"
 fi
 
 PS1='[\u@\h \W]\$ '
-
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx
