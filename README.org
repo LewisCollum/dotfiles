@@ -1,0 +1,95 @@
+#+property: header-args :results output
+
+* Geforce 960
+
+#+begin_src bash
+  lspci -k | grep -A 2 -E "(VGA|3D)"
+#+end_src
+
+#+RESULTS:
+: 01:00.0 VGA compatible controller: NVIDIA Corporation GM206 [GeForce GTX 960] (rev a1)
+: 	Subsystem: eVga.com. Corp. Device 3967
+: 	Kernel driver in use: nvidia
+
+* Automounting Internal SSD for Media
+
+[[https://www.reddit.com/r/linux/comments/1vhesg/best_file_system_for_movies/][ext4]] - journaling file system
+gpt - layout of partition tables
+
+We will format and partition our new SSD connected to SATA3 at =/dev/sdc=.
+
+#+begin_src bash
+  fdisk /dev/sdc
+  mkfs.ext4 /dev/sdc1
+#+end_src
+
+now we can see the partition
+
+#+begin_src bash
+  fdisk -l /dev/sdc
+#+end_src
+
+#+begin_example
+Disk /dev/sdc: 1.82 TiB, 2000398934016 bytes, 3907029168 sectors
+Disk model: Samsung SSD 870
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 56EAE282-4525-E441-8433-F009C4319CBE
+
+Device     Start        End    Sectors  Size Type
+/dev/sdc1   2048 3907028991 3907026944  1.8T Linux filesystem
+#+end_example
+
+Let's create a label for the partition
+
+#+begin_src bash
+  e2label /dev/sdc1 "catabasis"
+#+end_src
+
+and then in =/etc/fstab= insert
+
+#+begin_src
+  LABEL=catabasis /mnt/catabasis ext4 defaults 0 1
+#+end_src
+
+Then to test we can mount everything in =fstab=
+
+#+begin_src bash
+  mount -a
+#+end_src
+
+for a summary, we can use
+
+#+begin_src bash :results output
+  blkid
+#+end_src
+
+#+RESULTS:
+: /dev/sdb2: UUID="9be483b7-0ac5-42fa-94ea-b300c1be5cfb" BLOCK_SIZE="4096" TYPE="ext4" PARTLABEL="Linux filesystem" PARTUUID="470ff035-24de-4e94-ab5b-5f29e2d0ac2d"
+: /dev/sdb1: UUID="56F4-07BA" BLOCK_SIZE="512" TYPE="vfat" PARTLABEL="EFI System" PARTUUID="d8493b17-27ce-4668-931f-c21f3128de81"
+: /dev/sda2: BLOCK_SIZE="512" UUID="5A84D59584D573CB" TYPE="ntfs" PARTUUID="0ca915a8-02"
+: /dev/sda3: BLOCK_SIZE="512" UUID="F492A60292A5C986" TYPE="ntfs" PARTUUID="0ca915a8-03"
+: /dev/sda1: LABEL="System Reserved" BLOCK_SIZE="512" UUID="D49AD4249AD404C0" TYPE="ntfs" PARTUUID="0ca915a8-01"
+: /dev/sdc1: LABEL="catabasis" UUID="15651df2-3929-46d8-aa22-ae262f150bef" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="c72ac02c-ee6d-b547-b15f-dd03d6568b59"
+: /dev/sde1: UUID="6466-3635" BLOCK_SIZE="512" TYPE="exfat"
+
+Now, if we want to copy a removable device to the new SSD,
+
+#+begin_src bash
+  mount /dev/sde1 /mnt/usb
+#+end_src
+
+where =/dev/sde1= was found with =blkid=. As an example, we can copy
+GoPro files
+
+#+begin_src bash
+  # dry run
+  rsync --human-readable --archive --dry-run --verbose \
+        /mnt/usb/DCIM/100GOPRO/*{0838..1393}.* /mnt/catabasis/honeymoon/gopro > dryrun.txt
+
+  # actual run
+  rsync --human-readable --archive --progress --verbose \
+        /mnt/usb/DCIM/100GOPRO/*{0838..1393}.* /mnt/catabasis/honeymoon/gopro
+#+end_src
