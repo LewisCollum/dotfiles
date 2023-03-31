@@ -1,59 +1,18 @@
-theme = "slick"
-icons = "awesome6"
+icons_format = "{icon}"
 
-[[block]]
-block = "custom"
-command = "echo "
-on_click = "flameshot gui"
+[theme]
+theme = "solarized-dark"
+[theme.overrides]
+idle_bg = "#123456"
+idle_fg = "#abcdef"
 
-[[block]]
-block = "custom"
-command = "echo "
-on_click = "blueberry"
-
-[[block]]
-block = "custom"
-command = "echo "
-on_click = "cmst"
-
-[[block]]
-block = "net"
-format = "{ip} {speed_down;K*b}"
-format_alt = "{ip} {speed_up;K*b}"
-interval = 5
-
-[[block]]
-block = "custom"
-command = "echo '\uf0ac ' `curl ifconfig.me`" # assumes fontawesome icons
-interval = 60
-
-[[block]]
-block = "disk_space"
-path = "/"
-alias = "/"
-info_type = "available"
-unit = "GB"
-interval = 20
-warning = 20.0
-alert = 10.0
-
-[[block]]
-block = "memory"
-display_type = "memory"
-format_mem = "{mem_used_percents}"
-format_swap = "{swap_used_percents}"
-
-[[block]]
-block = "cpu"
-interval = 1
-
-[[block]]
-block = "load"
-interval = 1
-format = "{1m}"
-
-[[block]]
-block = "sound"
+[icons]
+icons = "awesome4"
+[icons.overrides]
+bat = " | | "
+bat_full = " |X| "
+bat_charging = " |^| "
+bat_discharging = " |v| "
 
 [[block]]
 block = "hueshift"
@@ -61,10 +20,113 @@ step = 50
 click_temp = 4500
 
 [[block]]
-block = "time"
-interval = 5
-format = "%a %m/%d/%Y %I:%M"
+block = "cpu"
 
 [[block]]
-block = "battery"
-if_command = "test -e /sys/class/power_supply/BAT0"
+block = "disk_space"
+path = "/"
+info_type = "available"
+alert_unit = "GB"
+interval = 1
+warning = 20.0
+alert = 10.0
+format = " $icon root:$available.eng(w:2) "
+
+[[block]]
+block = "disk_space"
+path = "/mnt/catabasis/"
+info_type = "available"
+alert_unit = "GB"
+interval = 20
+warning = 100.0
+alert = 10.0
+format = " $icon media:$available.eng(w:2) "
+
+
+[[block]]
+block = "memory"
+format = " $icon $mem_total_used_percents.eng(w:2) "
+format_alt = " $icon_swap $swap_used_percents.eng(w:2) "
+
+[[block]]
+block = "sound"
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
+
+[[block]]
+block = "time"
+interval = 5
+format = " $timestamp.datetime(f:'%a %d/%m %R') "
+
+# [[theme]]
+# = "slick"
+# # icons = "awesome6"
+
+# # [[block]]
+# # block = "custom"
+# # command = "echo "
+# # [[block.click]]
+# # cmd = "flameshot gui"
+
+# # [[block]]
+# # block = "custom"
+# # command = "echo "
+# # click = "blueberry"
+
+# # [[block]]
+# # block = "custom"
+# # command = "echo "
+# # click = "cmst"
+
+# [[block]]
+# block = "net"
+# format = "{ip} {speed_down;K*b}"
+# format_alt = "{ip} {speed_up;K*b}"
+# interval = 5
+
+# [[block]]
+# block = "custom"
+# command = "echo '\uf0ac ' `curl ifconfig.me`" # assumes fontawesome icons
+# interval = 60
+
+# [[block]]
+# block = "disk_space"
+# path = "/"
+# info_type = "available"
+# # unit = "GB"
+# interval = 20
+# warning = 20.0
+# alert = 10.0
+
+# # [[block]]
+# # block = "memory"
+# # display_type = "memory"
+# # format_mem = "{mem_used_percents}"
+# # format_swap = "{swap_used_percents}"
+
+# # [[block]]
+# # block = "cpu"
+# # interval = 1
+
+# # [[block]]
+# # block = "load"
+# # interval = 1
+# # format = "{1m}"
+
+# [[block]]
+# block = "sound"
+
+# [[block]]
+# block = "hueshift"
+# step = 50
+# click_temp = 4500
+
+# [[block]]
+# block = "time"
+# interval = 5
+# format = "%a %m/%d/%Y %I:%M"
+
+# # [[block]]
+# # block = "battery"
+# # if_command = "test -e /sys/class/power_supply/BAT0"
