@@ -81,8 +81,8 @@ Now, if we want to copy a removable device to the new SSD,
   mount /dev/sde1 /mnt/usb
 #+end_src
 
-where =/dev/sde1= was found with =blkid=. As an example, we can copy
-GoPro files
+where =/dev/sde1= was found with =blkid= (=dmesg -w= and =lsblk= are
+useful too). As an example, we can copy GoPro files
 
 #+begin_src bash
   # dry run
@@ -93,3 +93,31 @@ GoPro files
   rsync --human-readable --archive --progress --verbose \
         /mnt/usb/DCIM/100GOPRO/*{0838..1393}.* /mnt/catabasis/honeymoon/gopro
 #+end_src
+
+* GoPro Offloading
+
+Mounting
+#+begin_src bash
+  udisksctl mount -b /dev/sde1
+#+end_src
+
+Syncing
+#+begin_src bash
+  rsync -avzx . /mnt/catabasis
+#+end_src
+
+Transcoding
+Original size
+#+begin_src bash
+  ffmpeg -i GX011640.MP4 -c:v dnxhd -vf "scale=5312x2988,format=yuv422p10le" -profile:v dnxhr_hqx -b:v 746M -c:a pcm_s16le out/output.mov
+#+end_src
+
+1080
+#+begin_src bash
+  ffmpeg -i GX011640.MP4 -c:v dnxhd -vf "scale=-1:1080,format=yuv422p10le" -profile:v dnxhr_hqx -b:v 746M -c:a pcm_s16le out/output.mov
+#+end_src
+
+
+* Services
+https://wiki.archlinux.org/title/systemd
+

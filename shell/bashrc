@@ -8,3 +8,16 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 PS1='[\u@\h \W]\$ '
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/charon/google-cloud-sdk/path.bash.inc' ]; then . '/home/charon/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/charon/google-cloud-sdk/completion.bash.inc' ]; then . '/home/charon/google-cloud-sdk/completion.bash.inc'; fi
+source /usr/share/nvm/init-nvm.sh
+
+xset r rate 250 50
+alias gl="gcloud auth login"
+alias gal="gcloud auth application-default login"
+# alias tfa="terraform apply"
+# alias tfaa="terraform apply -auto-approve"

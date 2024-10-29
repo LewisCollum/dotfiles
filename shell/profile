@@ -9,6 +9,7 @@ export LD_LIBRARY_PATH=/usr/local/lib/:/usr/local/lib64/:$LD_LIBRARY_PATH
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+export REACT_PLANTNET_API_KEY="2b10yaCiaAd1BRiheDRBRHPKLu"
 
 #For OpenCV g++
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig/

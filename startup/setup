@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+for service in *.service; do
+    sudo cp -v "$service" "/etc/systemd/system/"
+    sudo systemctl enable $service
+    sudo systemctl restart $service
+done

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+alias goprometa='exiftool -ee -G3 -X'
+
+function goprorename {
+    file="$1"
+    project="$2"
+    device="$3"
+    
+    if [[ $file != G* ]]; then
+	echo "ERROR: file must start with a 'G' indicating it is GoPro"
+	return 1
+    fi
+    if [[ $project == "" || $device == "" ]]; then
+	echo "ERROR: missing parameter, 2nd parameter is project, 3rd parameter is device"
+	return 1
+    fi
+    datetime=`goprometa "$file" | grep QuickTime:CreateDate | sed -e 's/.*>\(.*\)<.*/\1/' -e 's/://g' -e 's/^..//'`
+    date=`echo "$datetime" | cut -f1 -d' '`
+    time=`echo "$datetime" | cut -f2 -d' '`
+    original="${file%%.*}"
+    extension="${file##*.}"
+    newname="${date}_${time}_${original}_${device}_${project}.${extension}"
+    mv "$file" "$newname"
+    echo "${file} -> ${newname}"
+}
+
+function goprorenameall {
+    project="$1"
+    device="$2"
+    for i in *; do goprorename "$i" "$project" "$device"; done    
+}
+
+function goprotranscode {
+    file="$1"
+    outdir="$2"
+    name="${file%%.*}"
+    #ffmpeg -i "$file" -vcodec libx265 -crf 28 -f mov "${outdir}/${name}.mov"
+    ffmpeg -i "$file" -c:v dnxhd -profile:v dnxhr_hq -pix_fmt yuv422p -c:a pcm_s16le -f mov "${name}.mov"
+}
+
+function goprotranscodeall {
+    outdir="$1"
+    for i in *.MP4; do goprotranscode "$i" "$outdir"; done  
+}

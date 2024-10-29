@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+files="$@"
+for name in $files; do
+    file="video/$name"
+    out="avid_720/$(basename $file .MP4).mov"
+    echo "$file -> $out"
+    ffmpeg -i "$file" -c:v dnxhd -vf "scale=1280:720,fps=30000/1001,format=yuv422p" -b:v 110M -c:a pcm_s16le "$out"
+done
